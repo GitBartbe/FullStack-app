@@ -1,3 +1,4 @@
+require("dotenv").config();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -32,7 +33,7 @@ const login = asyncHandler(async (req, res) => {
     },
     `${process.env.ACCESS_TOKEN_SECRET}`,
     // process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "15d" }
+    { expiresIn: "15s" }
   );
 
   const refreshToken = jwt.sign(
@@ -59,7 +60,7 @@ const login = asyncHandler(async (req, res) => {
 // @access Public - because access token has expired
 const refresh = (req, res) => {
   const cookies = req.cookies;
-  console.log(cookies);
+
   if (!cookies?.jwt) return res.status(401).json({ message: "Unauthorized" });
 
   const refreshToken = cookies.jwt;
@@ -86,7 +87,7 @@ const refresh = (req, res) => {
         },
         `${process.env.ACCESS_TOKEN_SECRET}`,
         // process.env.ACCESS_TOKEN_SECRET,
-        { expiresIn: "15m" }
+        { expiresIn: "15s" }
       );
 
       res.json({ accessToken });

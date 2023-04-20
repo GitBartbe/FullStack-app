@@ -75,7 +75,7 @@ export default {
   methods: {
     ...mapActions([GET_TOKEN]),
     async handleSubmit() {
-      await this.GET_TOKEN({ username: this.username, password: this.password })
+      await this.GET_TOKEN({ username: 'bartek', password: 'Test123' })
       this.username = ''
       this.password = ''
       this.$router.push('/')

@@ -3,4 +3,5 @@ const auth = ({ store, $storage, redirect, route }) => {
     !$storage.getCookie('accessToken') && redirect('/login')
   }
 }
+
 export default auth

@@ -7,7 +7,7 @@ export default {
     try {
       const { accessToken } = await this.$authService.getToken(payload)
       this.$storage.setCookie('accessToken', accessToken)
-      localStorage.setItem('accesToken', accessToken)
+      // localStorage.setItem('accesToken', accessToken)
       commit(SET_TOKEN, accessToken)
     } catch (err) {
       console.log(err)
@@ -16,7 +16,7 @@ export default {
   async [LOG_OUT]({ commit }) {
     try {
       await this.$authService.logOut()
-      this.$storage.removeCookie('accessToken')
+      this.$router.push('/login')
       commit(CLEAR_TOKEN)
     } catch (err) {
       console.log(err)
